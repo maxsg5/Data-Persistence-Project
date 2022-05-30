@@ -6,8 +6,10 @@ using System.IO;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance; // static instance of this class
-    public string playerName; // playerName of the player
+    public string bestScorePlayerName;
+    public string currentPlayerName; // playerName of the player
     public int score; // score of the player
+    public int bestScore; // best score of the player
 
     private void Awake()
     {
@@ -28,15 +30,15 @@ public class MenuManager : MonoBehaviour
     [System.Serializable]
     class SaveData
     {
-        public string playerName;
-        public int score;
+        public string bestScorePlayerName;
+        public int bestScore;
     }
 
     public void Save()
     {
         SaveData data = new SaveData();
-        data.playerName = playerName;
-        data.score = score;
+        data.bestScorePlayerName = bestScorePlayerName;
+        data.bestScore = bestScore;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
@@ -48,8 +50,8 @@ public class MenuManager : MonoBehaviour
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/savefile.json");
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            playerName = data.playerName;
-            score = data.score;
+            bestScorePlayerName = data.bestScorePlayerName;
+            bestScore = data.bestScore;
         }
     }
 }
