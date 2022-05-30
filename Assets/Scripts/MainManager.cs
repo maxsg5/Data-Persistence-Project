@@ -62,6 +62,11 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        
+
+    }
     void AddPoint(int point)
     {
         m_Points += point;
